@@ -15,10 +15,11 @@ struct Node {
     unsigned int prio;
 };
 
-Node<long long> pool[10000005];
+Node<long long> pool[2100005];
 int pool_ptr = 1;
 
 int newNode(long long v) {
+    if (pool_ptr >= 2100000) return 0; // Out of memory
     int u = pool_ptr++;
     pool[u].l = pool[u].r = 0;
     pool[u].val = v;
@@ -29,6 +30,7 @@ int newNode(long long v) {
 
 int copyNode(int u) {
     if (!u) return 0;
+    if (pool_ptr >= 2100000) return 0;
     int v = pool_ptr++;
     pool[v] = pool[u];
     return v;
